@@ -1,6 +1,3 @@
-1, musafir cafe, divya prakash dhube, 3 
-2, gunahon ka devta, dharmvir bharti, 4 
-1, october junction, divya prakash dhube, 4 
-5, atomic habit, harshad, 3 
-6, meluha, harshad dorge, 3 
+ 1, mehula, harshad, 3 
+ 1, gunahon ka devta, dharmvir bharti, 4 
  

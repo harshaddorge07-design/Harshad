@@ -9,15 +9,31 @@ def menu():
     4.register user
     5.issue book
     6.Exit ''')
+book_data = []
 
 def read_book():
     """This is a function to merely read content iof a file"""
-    with open("book_data.txt", "r") as file:
+    try:
+      with open("book_data.txt", "r") as file:
         book_data = file.readlines()
-    return book_data 
+      return True, book_data 
+    except FileNotFoundError:
+       book_data = []
+       return False, book_data
+
+def view_book():
+    """Display all books stored in the file."""
+    global book_data
+    book_data = read_book()
+    if len(book_data) == 0:
+      print(Fore.RED + "There is no Book in Database to View")
+    else:
+      for i in book_data:
+        print(i)    
 
 def add_book():
     """This is add book function. It takes book ID, book name, author, Quantity as input."""
+    global book_data
     print(Fore.GREEN + "---ADD BOOK---")
     book_data = read_book()
     book_name = input("Enter the book name :: ").strip()
@@ -26,7 +42,7 @@ def add_book():
             print(Fore.GREEN + "The Book Already Exists")
             print(Fore.RED + "Terminting The Function")
             return False
-    book_id = (len(book_data) + 1)
+    book_id = len(book_data) + 1
     author_name = input("Enter author name :: ").strip()
     print(Fore.GREEN + "Book ID is :: ", book_id)
     quantity = input("Enter Quantity :: ")
@@ -38,23 +54,14 @@ def add_book():
                 break
             else:
                 print(error_message)
+                quantity = input("Enter Quantity :: ")
         else:
             print(error_message)
+            quantity = input("Enter Quantity :: ")
     print(Fore.GREEN + "---Book added successfully---".center(100))
 
     with open("book_data.txt", "a") as file:
-        file.write(f"{book_id}, {book_name}, {author_name}, {quantity} \n ")
-
-def view_book():
-    """Display all books stored in the file."""
-    book_data = read_book()
-    # if not book_data:
-    #    print(Fore.YELLOW + "No BOOK found ")
-    #    return
-    # print(book_data)  
-    for i in book_data:
-       print(i.replace(",", "|"), end="")
-
+        file.write(f"{book_id}, {book_name}, {author_name}, {quantity}\n")
 
 if __name__ == "__main__": 
     while True:
