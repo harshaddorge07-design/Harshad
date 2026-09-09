@@ -1,2 +1,3 @@
 python register.py
 python main.py
+

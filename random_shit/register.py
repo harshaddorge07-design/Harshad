@@ -1,0 +1,3 @@
+
+import pandas
+help(pandas)
